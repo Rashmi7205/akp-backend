@@ -214,6 +214,8 @@ class Blog
             $this->get_message("Image is required!");
             return false;
         }
+        $title = $this->conn->real_escape_string($title);
+        $desc = $this->conn->real_escape_string($desc);
         $content = $this->conn->real_escape_string($content);
         $sql = "UPDATE tbl_blog SET blog_title='$title',blog_image='$image',blog_content='$content',blog_desc='$desc' WHERE blog_id=$id";
 
