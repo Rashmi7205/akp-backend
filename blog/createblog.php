@@ -26,33 +26,53 @@ if (isset($_POST['submit'])) {
     <title>
         Blog create | AK Pipes And Sanitary House
     </title>
-    <link rel="stylesheet" href="./css/createblog.css">
+    <link rel="stylesheet" href="./css/createpage.css"/>
 </head>
 
 <body>
+<!-- NavBar section -->
+<nav class="navbar">
+        <div class="logo">
+            <a href="#">Logo</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <ul class="nav-list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Enquires</a></li>
+        </ul>
+    </nav>
+    <!-- Navbatr section Ends -->
+    <!-- main section -->
     <div class="main">
-        <h1></h1>
+ 
+        <div class="heading">
+            <h1 class="heading-text">
+                Create Blog Post 
+            </h1>
+        </div>
+      
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
             <div class="input-box">
                 <div class="coolinput">
                     <label for="title" class="text">Title Of the Blog</label><br />
-                    <input type="text" name="title" id="title" class="input" required>
+                    <input placeholder="Title Of the Blog" type="text" name="title" id="title" class="input" required>
                 </div>
                 <div class="coolinput">
-
                     <label for="desc" class="text">Description of the blog</label><br />
-                    <input type="text" name="desc" id="desc" class="input" required>
+                    <input placeholder="Description Of The Blog" type="text" name="desc" id="desc" class="input" required>
                 </div>
             </div>
             <div class="image-input-box">
                 <label class="custum-file-upload" for="image">
                     <!-- image -->
-                    <img  id="preview"  src="https://img.icons8.com/fluency/96/add-image.png" alt="add-image"/>
+                    <img id="preview" src="https://img.icons8.com/fluency/96/add-image.png" alt="add-image" />
                     <div class="text">
                         <span>Click to upload image</span>
                     </div>
-                    <input 
-                    type="file" name="image" id="image" style="display:none;" accept="image/*" required  onchange="showImage(this)">
+                    <input type="file" name="image" id="image" style="display:none;" accept="image/*" required
+                        onchange="showImage(this)">
                 </label>
 
 
@@ -143,8 +163,7 @@ if (isset($_POST['submit'])) {
             </button>
         </form>
     </div>
-
-
+<!-- Main section ends here -->
 
 
     <!-- <script src="./ck5/ckeditor.js"></script> -->
@@ -152,19 +171,27 @@ if (isset($_POST['submit'])) {
 
     <!-- script for showing image -->
     <script>
-           function showImage(input) {
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const preview = document.getElementById('preview');
-      preview.style.height="100%";
-      preview.style.height="100%";
+        function showImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('preview');
+                    preview.style.height = "100%";
+                    preview.style.height = "100%";
 
-      preview.src = e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-list');
+
+            menuToggle.addEventListener('click', function () {
+                navList.classList.toggle('show');
+            });
+        });
     </script>
 
     <!-- Ck editor configuration -->

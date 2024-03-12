@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* sidebar  */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+}
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.row {
+  flex-direction: row;
+}
+.col {
+  flex-direction: column;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  display: block;
+}
+i {
+  margin: 0px 15px;
+}
+.hidden{
+  display: none;
+}
+.sidebar {
+  width: 15%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  gap: 40px;
+  border-right: 1px solid slategray;
+}
+.company-logo {
+  width: 70px;
+  height: auto;
+}
+.sidebar_header {
+  padding: 20px 10px;
+}
+.company-name {
+  font-weight: 700;
+}
+.section_list {
+  align-items: start;
+  gap: 15px;
+}
+.section_list > li {
+  border-radius: 10px;
+}
+.section_list > li > a {
+  color: black;
+  padding: 5px 0px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.active {
+  background-color: #deeaec;
+}
+.admin_panel {
+  width: 85%;
+}
+.admin_panel_header {
+  width: 100%;
+  height: 70px;
+  padding: 20px 5px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid silver;
+}
+
+.admin_account {
+  width: 25%;
+  height: 100%;
+  gap:20px;
+}
+.admin_account > button {
+  height: 40px;
+  width: 42px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.account_edit {
+  position: absolute;
+  top: 95px;
+  right: 130px;
+  width: 300px;
+  height: 400px;
+  background-color: #e4e8e8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 6px #000;
+  padding:20px 5px;
+  text-transform: capitalize;
+  transition: all .3s ease-in-out;
+  z-index: 50;
+  display: none;
+}
+.account_edit>form>input{
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 90%;
+  background-color: #fff;
+  padding:5px 10px;
+  border-radius: 5px;
+}
+#admin_role{
+  width: 60%;
+  font-weight: bold;
+  margin: 30px auto;
+  padding:5px 10px;
+  text-transform: uppercase;
+  border-radius: 5px;  
+}
+.close_account_edit{
+  color: #fff;
+  background-color:#d94d4d;
+  width: 100%;
+  height: 30px;
+  margin: 0 auto;
+  border:none;
+  cursor: pointer;
+ justify-self: end;
+}
+.account_edit>form>button{
+  padding:5px 0px;
+  width: 80%;
+  margin: 20px ;
+  justify-self: end;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background-color: #fff;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #fff;
+  color: grey;
+  border-bottom: 2px solid grey;
+  text-align: center;
+}
+
+td {
+    text-align: center;
+  color: #333;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete{
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.delete {
+    display: block;
+  color: #fff;
+  background-color: #e74c3c;
+}
+.delete:hover {
+  background-color: #e74c3c;
+  box-shadow: 0px 15px 20px rgba(157, 30, 41, 0.827);
+  color: #fff;
+  transform: translateY(-3px);
+}
+.delete:active {
+  transform: translateY(-1px);
+}
+
+
+.admin_panel_data {
+  margin: 20px auto;
+  width: 98%;
+  min-height: 80%;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+.pagination{
+    width: 200px;
+    height: 70px;
+    align-self: flex-end;
+    gap:5px;
+}
+.pagination>a{
+    padding:6px 3px;
+    background-color:#d8eaea;
+    box-shadow: 1px 1px 3px #000;
+}
+

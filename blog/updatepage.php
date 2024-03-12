@@ -1,12 +1,13 @@
 <?php
 include('./blog.php');
-    $id = null;
-    $blogDetails=null;
-    $blog = new Blog();
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $blogDetails = $blog->get_blog_by_id($id);
-    }
+$id = null;
+$blogDetails = null;
+$blog = new Blog();
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $blogDetails = $blog->get_blog_by_id($id);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,42 +18,54 @@ include('./blog.php');
     <title>
         Blog create | AK Pipes And Sanitary House
     </title>
-    <link rel="stylesheet" href="./css/createblog.css">
+    <link rel="stylesheet" href="./css/createpage.css">
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">Logo</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <ul class="nav-list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Enquires</a></li>
+        </ul>
+    </nav>
     <div class="main">
-        <h1></h1>
-        <form action="./updateblog.php?id=<?php echo $blogDetails['blog_id']; ?>" method="post" enctype="multipart/form-data">
+        <h1 style="color:black">Update Blog</h1>
+        <form action="./updateblog.php?id=<?php echo $blogDetails['blog_id']; ?>" method="post"
+            enctype="multipart/form-data">
             <div class="input-box">
                 <div class="coolinput">
                     <label for="title" class="text">Title Of the Blog</label><br />
-                    <input type="text" name="title" value="<?php echo $blogDetails['blog_title']; ?>" id="title" class="input" required>
+                    <input type="text" name="title" value="<?php echo $blogDetails['blog_title']; ?>" id="title"
+                        class="input" required>
                 </div>
                 <div class="coolinput">
                     <label for="desc" class="text">Description of the blog</label><br />
-                    <input type="text" value="<?php echo $blogDetails['blog_desc']; ?>" name="desc" id="desc" class="input" required>
+                    <input type="text" value="<?php echo $blogDetails['blog_desc']; ?>" name="desc" id="desc"
+                        class="input" required>
                 </div>
             </div>
             <div class="image-input-box">
                 <label class="custum-file-upload" for="image">
                     <!-- image -->
-                    <img  id="preview"  src="<?php echo $blogDetails['blog_image']; ?>" alt="add-image"/>
+                    <img id="preview" height="100%" width="100%" src="<?php echo $blogDetails['blog_image']; ?>"
+                        alt="add-image" />
                     <div class="text">
                         <span>Click to upload image</span>
                     </div>
-                    <input 
-                    type="file" name="image" id="image" src="<?php echo $blogDetails['blog_image']; ?>" accept="image/*"  onchange="showImage(this)">
+                    <input type="file" name="image" id="image" src="<?php echo $blogDetails['blog_image']; ?>"
+                        accept="image/*" onchange="showImage(this)">
                 </label>
-
-
             </div>
-
-            <br>
             <textarea name="editor" id="editor" value="<?php echo $blogDetails['blog_content']; ?>">
-                
+
             </textarea>
-            <input class="btn" type="submit" name="submit" value="submit"/>
+            <input class="btn" type="submit" name="submit" value="submit" />
         </form>
     </div>
 
@@ -64,19 +77,19 @@ include('./blog.php');
 
     <!-- script for showing image -->
     <script>
-           function showImage(input) {
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const preview = document.getElementById('preview');
-      preview.style.height="100%";
-      preview.style.height="100%";
+        function showImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('preview');
+                    preview.style.height = "100%";
+                    preview.style.height = "100%";
 
-      preview.src = e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
     <!-- Ck editor configuration -->
