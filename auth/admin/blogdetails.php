@@ -41,6 +41,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            .action-buttons>a{
+                padding:5px 8px;
+                display: block;
+                color: #fff;
+                box-shadow: 1px 1px 7px #fff;
+                border-radius: 8px;
+                text-transform: capitalize;
+            }
+        </style>
 </head>
 
 <body class="flex">
@@ -54,9 +65,9 @@
             </p>
         </div>
         <ul class="section_list flex col">
-            <li class="w-full"><a class="w-full" href="#"><i class="fa-solid fa-house"></i>Home</a></li>
-            <li><a href="#"><i class="fa-solid fa-users"></i>Customers</a></li>
-            <li><a href="#"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
+            <li class="w-full"><a class="w-full" href="./"><i class="fa-solid fa-house"></i>Home</a></li>
+            <li><a href="./"><i class="fa-solid fa-users"></i>Customers</a></li>
+            <li><a href="./enquirypage.php"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
             <li class="w-full active"><a href="#"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
             <li><a href="#"><i class="fa-solid fa-cube"></i>Product</a></li>
         </ul>
@@ -65,13 +76,15 @@
     <div class="admin_panel flex col" style="align-self:start;">
         <!-- Admin panel header -->
         <div class="admin_panel_header flex">
-            <h1 class="flex"> <i class="fa-solid fa-users"></i>Customers</h1>
+            <h1 class="flex"> <i class="fa-solid fa-newspaper"></i>Blogs</h1>
+            <a href="../../blog/createblog.php">+ Create </a>
             <div class="admin_account flex">
                 <button>
                     <i class="fa-solid fa-user"></i>
                 </button>
                 <a href="./logout.php">logout</a>
             </div>
+          
         </div>
         <!-- admin user data table -->
         <div class="admin_panel_data flex col">
@@ -101,9 +114,15 @@
                             <?php echo $blogList[$i][1]; ?>
                             </td>
                             <td colspan="2" class="action-buttons">
-                                <a href="../../blog/single-blog/?title=<?php echo $blogList[$i][1]; ?>">View</a>
-                                <a href="../../blog/updatepage.php?id=<?php echo $blogList[$i][0]; ?>">edit</a>
-                                <a href="./blogdetails.php?delete_id=<?php echo $blogList[$i][0]; ?>">delete</a>
+                                <a 
+                                style="background-color:#4dc3d7"
+                                href="../../blog/single-blog/?title=<?php echo $blogList[$i][1]; ?>">View</a>
+                                <a 
+                                style="background-color:#201030" 
+                                href="../../blog/updatepage.php?id=<?php echo $blogList[$i][0]; ?>">edit</a>
+                                <a 
+                                style="background-color:#ff4400"   
+                                href="./blogdetails.php?delete_id=<?php echo $blogList[$i][0]; ?>">delete</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -116,6 +135,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>

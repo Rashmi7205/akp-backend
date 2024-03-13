@@ -55,8 +55,8 @@ if(isset($_GET['logout' ])) {
         <ul class="section_list flex col">
             <li class="w-full active"><a class="w-full" href="#"><i class="fa-solid fa-house"></i>Home</a></li>
             <li><a href="#"><i class="fa-solid fa-users"></i>Customers</a></li>
-            <li><a href="#"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
-            <li><a href="#"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
+            <li><a href="./enquirypage.php"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
+            <li><a href="./blogdetails.php"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
             <li><a href="#"><i class="fa-solid fa-cube"></i>Product</a></li>
         </ul>
     </div>

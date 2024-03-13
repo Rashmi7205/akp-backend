@@ -95,7 +95,7 @@ if (isset($_GET['page'])) {
         </div>
         <ul class="section_list flex col">
             <li><a class="w-full" href="./"><i class="fa-solid fa-house"></i>Home</a></li>
-            <li><a href="#"><i class="fa-solid fa-users"></i>Customers</a></li>
+            <li><a href="./"><i class="fa-solid fa-users"></i>Customers</a></li>
             <li class="w-full active"><a href="#"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
             <li><a href="./blogdetails.php"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
             <li><a href="#"><i class="fa-solid fa-cube"></i>Product</a></li>
@@ -105,7 +105,7 @@ if (isset($_GET['page'])) {
     <div class="admin_panel flex col">
         <!-- Admin panel header -->
         <div class="admin_panel_header flex">
-            <h1 class="flex"> <i class="fa-solid fa-users"></i>Customers</h1>
+            <h1 class="flex"> <i class="fa-solid fa-envelope"></i>Enquiries</h1>
             <div class="admin_account flex">
                 <button>
                     <i class="fa-solid fa-user"></i>
