@@ -1,9 +1,7 @@
 <?php
 class Blog
 {
-    
     private $conn = false;
-
     // create connection
     public function __construct()
     {
@@ -50,7 +48,7 @@ class Blog
         $content = $this->conn->real_escape_string($content);
         session_start();
         if(isset( $_SESSION["USER_CRED"])){
-            if($_SESSION["USER_CRED"]["role"] == "ADMIN"){
+            if($_SESSION["USER_CRED"]["role"] == "ADMIN" || $_SESSION["USER_CRED"]["role"] == "MANAGER"){
                 $id = $_SESSION['USER_CRED']["admin_id"];
                 $sql = "INSERT INTO `tbl_blog` (`blog_title`, `blog_image`, `blog_content`, `admin_id`, `blog_desc`) VALUES ('$title','$image','$content',$id,'$desc');";
                 $res = $this->conn->query($sql);

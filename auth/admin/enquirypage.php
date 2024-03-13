@@ -1,18 +1,19 @@
 <?php
-include("./user.php");
+include("./enquire.php");
 $page = 1;
-$user = new User();
-$userList = null;
-
+$enquireList = null;
+$enq = new Enquiry();
 if (isset($_GET['page'])) {
-  
     $page = $_GET['page'];
-    echo $page;
-    $userList = $user->get_user_details($page);
-
+    if($page<=1){
+        $page=1;
+    }
+    $enquireList = $enq->get_All_enquire($page);
 } else {
-    $userList = $user->get_user_details();
+    $enquireList = $enq->get_All_enquire();
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,60 @@ if (isset($_GET['page'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Dashboard</title>
     <!-- css file -->
-    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/customer.css" />
+    <style>
+ select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    padding: 8px;
+    border-radius: 19px;
+    font-weight: 300;
+    }
+
+    /* Custom select styles */
+    .custom-select {
+        position: relative;
+        display: inline-block;
+        width: 200px; /* Adjust the width as needed */
+    }
+
+    .custom-select select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #FFD700, #FF6347); /* Adjust colors as needed */
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+
+    .custom-select::before {
+        content: '\25BC';
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #fff; /* Adjust arrow color */
+    }
+    .success{
+        border:1px solid green;
+        background-color: #81ef81a6;
+    }
+    .pending{
+        border: 1px solid red;
+        background-color: #e516167d;
+    }
+    .canceled{
+        border: 1px solid red;
+        background-color: #e516168a;
+    }
+    </style>
     <!-- font-awesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -40,10 +94,10 @@ if (isset($_GET['page'])) {
             </p>
         </div>
         <ul class="section_list flex col">
-            <li class="w-full active"><a class="w-full" href="#"><i class="fa-solid fa-house"></i>Home</a></li>
+            <li><a class="w-full" href="./"><i class="fa-solid fa-house"></i>Home</a></li>
             <li><a href="#"><i class="fa-solid fa-users"></i>Customers</a></li>
-            <li><a href="#"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
-            <li><a href="#"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
+            <li class="w-full active"><a href="#"><i class="fa-regular fa-envelope"></i>Enquiries</a></li>
+            <li><a href="./blogdetails.php"><i class="fa-solid fa-newspaper"></i>Blogs</a></li>
             <li><a href="#"><i class="fa-solid fa-cube"></i>Product</a></li>
         </ul>
     </div>
@@ -64,41 +118,49 @@ if (isset($_GET['page'])) {
             <table id="data">
                 <thead>
                     <tr style="border-bottom:1px solid grey;">
-                        <th>User ID</th>
+                        <th>Enq. ID</th>
                         <th>Customer Name</th>
                         <th>Contact</th>
                         <th>Date</th>
                         <th>Action</th>
+                        <th>message</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    for ($i = 0; $i < count($userList); $i++) {
+                    for ($i = 0; $i < count($enquireList); $i++) {
                         ?>
                         <tr style="border-bottom:1px solid grey;">
                             <td>
-                                <?php echo $userList[$i][0]; ?>
+                                <?php echo $enquireList[$i][0]; ?>
                             </td>
                             <td>
-                                <?php echo $userList[$i][1]; ?>
+                                <?php echo $enquireList[$i][6]; ?>
                             </td>
                             <td>
-                            <?php echo $userList[$i][3]; ?>
+                                <?php echo $enquireList[$i][8]; ?>
                             </td>
                             <td>
-                            <?php
-                                // echo $userList[$i][3];
-                                $date = new DateTime($userList[$i][2]);
+                                <?php
+                                $date = new DateTime($enquireList[$i][7]);
                                 echo $date->format('M d, Y');
                                 ?>
                             </td>
                             <td class="action-buttons">
-                               <a href="./deleteuser.php?id=<?php echo $userList[$i][0]; ?>"
-                               class="delete"
-                               >
-                               <i class="fa-solid fa-trash"></i>
-                                    Delete
-                               </a>
+                                <form class="statusForm" action="./editstatus.php?id=<?php echo $enquireList[$i][0]; ?>"
+                                    method="post">
+                                    <select name="status"  class="statusSelect <?php echo $enquireList[$i][3]; ?>">
+                                        <option ">
+                                            <?php echo $enquireList[$i][3]; ?>
+                                        </option>
+                                        <option class="pending" value="pending">Pending</option>
+                                        <option  class="success" value="success">Success</option>
+                                        <option  class="canceled" value="canceled">Canceled</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td>
+                                <?php echo $enquireList[$i][4]; ?>
                             </td>
                         </tr>
                     <?php } ?>
@@ -106,12 +168,19 @@ if (isset($_GET['page'])) {
                 </tbody>
             </table>
             <div class="pagination flex">
-                <a href=".?page=<?php echo ($page-1); ?>"><i class="fa-solid fa-angle-left"></i></a>
-                <a href=".?page=<?php echo ($page+1); ?>"><i class="fa-solid fa-angle-right"></i></a>
+                <a href="./enquirypage.php?page=<?php echo ($page - 1); ?>"><i class="fa-solid fa-angle-left"></i></a>
+                <a href="./enquirypage.php?page=<?php echo ($page + 1); ?>"><i class="fa-solid fa-angle-right"></i></a>
             </div>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.statusSelect').on('change', function() {
+            $(this).closest('form').submit();
+        });
+    });
 </script>
 
 

@@ -1,5 +1,6 @@
 <?php
 include("./user.php");
+include (".././admin.php");
 $page = 1;
 $user = new User();
 $userList = null;
@@ -13,7 +14,15 @@ if (isset($_GET['page'])) {
 if(isset($_POST['update'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
-    
+    $role = $_POST['role'];
+    $admin_id = $_SESSION['USER_CRED']['admin_id'];
+    $manager_id = $_SESSION['USER_CRED']['admin_id'];
+    $admin = new Admin();
+    $admin->update_admin($username,$email,$role, $admin_id ,$manager_id );
+    header('Location: ./');
+}
+if(isset($_GET['logout' ])) {
+    $admin->logout();
 }
 
 ?>
@@ -60,7 +69,7 @@ if(isset($_POST['update'])){
                 <button id="open-edit-box">
                     <i class="fa-solid fa-user"></i>
                 </button>
-                <a href="./logout.php">logout</a>
+                <a href="./?logout=true">logout</a>
                 <div class="account_edit hidden">
                     <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="flex col w-full">
                         <h4>Account Information</h4>

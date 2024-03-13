@@ -1,6 +1,5 @@
 <?php
 // include ".././utils.php";
-require_once '.././constants.php';
 class Admin
 {
     private $conn = false;
@@ -8,7 +7,7 @@ class Admin
     public function __construct()
     {
         if (!$this->conn) {
-            $this->conn = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE) or die("Something went wrong!");
+            $this->conn = new mysqli("localhost", "root","", "akp") or die("Something went wrong!");
         } else {
             echo "Connection Failed!";
             exit(1);

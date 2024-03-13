@@ -78,6 +78,7 @@ i {
 }
 .admin_panel {
   width: 85%;
+  align-self: flex-start;
 }
 .admin_panel_header {
   width: 100%;
