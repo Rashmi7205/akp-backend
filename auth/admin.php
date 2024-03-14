@@ -113,7 +113,7 @@ class Admin
             header("Location:/");
         }else{
             $this->get_message("Sign up to  access full functionality.");
-            header("Location:/");
+            header("Location:./login.php");
         }
     }
     // create admin

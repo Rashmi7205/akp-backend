@@ -1,5 +1,16 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['USER_CRED'])){
+    echo "<script>
+        window.alert('Login to access this route');
+        location.href='../login.php';
+    </script>";
+    exit();
+}
 include("./enquire.php");
+include ("../admin.php");
+
 $page = 1;
 $enquireList = null;
 $enq = new Enquiry();
@@ -13,6 +24,19 @@ if (isset($_GET['page'])) {
     $enquireList = $enq->get_All_enquire();
 }
 
+if(isset($_POST['update'])){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $role = $_POST['role'];
+    $admin_id = $_SESSION['USER_CRED']['admin_id'];
+    $manager_id = $_SESSION['USER_CRED']['admin_id'];
+    $admin = new Admin();
+    $admin->update_admin($username,$email,$role, $admin_id ,$manager_id );
+    header('Location: ./');
+}
+if(isset($_GET['logout' ])) {
+    $admin->logout();
+}
 
 ?>
 <!DOCTYPE html>
@@ -107,10 +131,42 @@ if (isset($_GET['page'])) {
         <div class="admin_panel_header flex">
             <h1 class="flex"> <i class="fa-solid fa-envelope"></i>Enquiries</h1>
             <div class="admin_account flex">
-                <button>
+                <button id="open-edit-box">
                     <i class="fa-solid fa-user"></i>
                 </button>
-                <a href="./logout.php">logout</a>
+                <a href="./?logout=true">logout</a>
+                <div class="account_edit hidden">
+                    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="flex col w-full">
+                        <h4>Account Information</h4>
+                        <label for="username">Username:</label><br />
+                        <input type="text" id="username" name="username"
+                        value="<?php echo $_SESSION['USER_CRED']['admin_name']; ?>"
+                        />
+                        <label for="email">email:</label><br />
+                        <input type="text" id="email" name="email" value="<?php echo $_SESSION['USER_CRED']['admin_email']; ?>" />
+
+                        <?php
+                            $role = $_SESSION['USER_CRED']['role'];
+                            if($role == "MANAGER"){
+                          ?>    
+                        <select name="role" id="admin_role">
+                            <option value="<?php echo $_SESSION['USER_CRED']['role']; ?>" selected><?php echo $_SESSION['USER_CRED']['role']; ?></option>
+                            <option value="manager">MANAGER</option>
+                            <option value="Admin">Admin</option>
+                            <option value="User">MANAGER</option>
+                        </select>
+                        <?php }else{
+                            echo "<h3>$role</h3>";
+                        } ?>
+                        <button
+                        type="submit"
+                        name="update">
+                            Update
+                        </button>
+                    </form>
+                        <button type="button" class="close_account_edit">X</button>
+
+                </div>
             </div>
         </div>
         <!-- admin user data table -->
@@ -174,6 +230,7 @@ if (isset($_GET['page'])) {
         </div>
     </div>
 </body>
+<script src="./js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function() {

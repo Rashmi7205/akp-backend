@@ -8,7 +8,7 @@
         if($isLoggedIn){
             echo "
                 <script>
-                    window.location.href='/pr-1/'
+                    window.location.href='./admin/'
                 </script>
             ";
         }

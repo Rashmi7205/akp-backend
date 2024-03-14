@@ -1,10 +1,19 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['USER_CRED'])){
+    echo "<script>
+        window.alert('Login to access this route');
+        location.href='../login.php';
+    </script>";
+    exit();
+}
+
 include("./user.php");
 include (".././admin.php");
 $page = 1;
 $user = new User();
 $userList = null;
-session_start();
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
     $userList = $user->get_user_details($page);
